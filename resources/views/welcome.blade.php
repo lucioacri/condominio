@@ -14,12 +14,14 @@
 
                         {{-- Immagine --}}
                         @if($doc->image_path)
-                            <img src="{{ asset($doc->image_path) }}" class="card-img-top">
+                            <img src="{{ asset($doc->image_path) }}" class="card-img-top card-img-standard">
                         @endif
 
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ $doc->title }}</h5>
-                            <span class="badge bg-secondary mb-2">{{ $doc->type }}</span>
+                            <div>
+                                <span class="badge bg-secondary mb-2">{{ $doc->type }}</span>
+                            </div>
 
                             <p class="card-text flex-grow-1">
                                 {{ Str::limit($doc->content, 120) }}
