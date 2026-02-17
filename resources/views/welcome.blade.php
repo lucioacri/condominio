@@ -12,7 +12,6 @@
                 <div class="col-md-4">
                     <div class="card h-100 shadow-sm">
 
-                        {{-- Immagine --}}
                         @if($doc->image_path)
                             <img src="{{ asset($doc->image_path) }}" class="card-img-top card-img-standard">
                         @endif

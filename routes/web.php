@@ -52,6 +52,18 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     return view('admin.dashboard', compact('documents'));
     })->name('admin.dashboard');
 
+    Route::get('/users', function(){
+        $user = Auth::user();
+
+        if (!$user->isAdmin()) {
+            abort(403);
+        }
+
+        $users = User::latest() -> get();
+
+        return view('admin.users', compact('users'));
+    })->name('admin.users');
+
 
     
     Route::get('/upload', function () {
