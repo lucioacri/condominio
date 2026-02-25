@@ -9,7 +9,7 @@
     @else
         <div class="row g-4">
             @foreach($documents as $doc)
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <div class="card h-100 shadow-sm">
 
                         @if($doc->image_path)
