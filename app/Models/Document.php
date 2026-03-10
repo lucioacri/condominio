@@ -10,7 +10,7 @@ class Document extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'type', 'content', 'image_path', 'user_id'
+        'title', 'type', 'content', 'image_path', 'user_id', 'amount'
     ];
 
     public function user() {

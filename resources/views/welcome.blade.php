@@ -22,9 +22,13 @@
                                 <span class="badge bg-secondary mb-2">{{ $doc->type }}</span>
                             </div>
 
-                            <p class="card-text flex-grow-1">
-                                {{ Str::limit($doc->content, 120) }}
-                            </p>
+                            @if($doc->amount)
+                                <p class="card-text">
+                                    <strong>Importo:</strong> € {{ number_format($doc->amount, 2, ',', '.') }}
+                                </p>
+                            @endif
+
+                            
                         </div>
 
                         <div class="card-footer text-muted small">

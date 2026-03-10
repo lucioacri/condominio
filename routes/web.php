@@ -85,6 +85,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         'title' => 'required|string|max:255',
         'type' => 'required|string|max:100',
         'content' => 'required|string',
+        'amount' => 'nullable|numeric',
         'image' => 'nullable|image|max:2048',
         ]);
 
@@ -101,6 +102,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             'title' => $request->title,
             'type' => $request->type,
             'content' => $request->content,
+            'amount' => $request->amount,
             'image_path' => $imagePath,
             'user_id' => $user->id,
         ]); 
@@ -126,6 +128,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         'title' => 'required|string|max:255',
         'type' => 'required|string|max:100',
         'content' => 'required|string',
+        'amount' => 'nullable|numeric',
         'image' => 'nullable|image|max:2048',
     ]);
 
@@ -148,6 +151,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         'title' => $request->title,
         'type' => $request->type,
         'content' => $request->content,
+        'amount' => $request->amount,
         'image_path' => $document->image_path,
     ]);
 

@@ -24,7 +24,13 @@
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ $doc->title }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{ $doc->type }}</h6>
-                            <p class="card-text flex-grow-1">{{ Str::limit($doc->content, 100) }}</p>
+
+                            @if($doc->amount)
+                                <p class="card-text">
+                                    <strong>Importo:</strong> € {{ number_format($doc->amount, 2, ',', '.') }}
+                                </p>
+                            @endif
+                            
                         </div>
                         <div class="card-footer text-muted">
                             Caricato da {{ $doc->user->name }} <br>

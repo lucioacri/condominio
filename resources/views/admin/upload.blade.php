@@ -12,8 +12,13 @@
         @csrf
 
         <div class="mb-3">
-            <label for="title" class="form-label">Titolo / descrizione:</label>
+            <label for="title" class="form-label">Descrizione breve:</label>
             <input type="text" class="form-control" name="title" id="title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="amount" class="form-label">Importo:</label>
+            <input type="decimal" class="form-control" name="amount" id="amount" required>
         </div>
 
         <div class="mb-3">

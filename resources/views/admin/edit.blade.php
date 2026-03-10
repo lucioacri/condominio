@@ -39,6 +39,18 @@
             </select>
         </div>
 
+        <div class="mb-3">
+            <label for="amount" class="form-label">Importo:</label>
+            <input 
+                type="number" 
+                step="0.01"
+                class="form-control" 
+                name="amount" 
+                id="amount"
+                value="{{ old('amount', $document->amount) }}"
+            >
+        </div>
+
 
         <div class="mb-3">
             <label class="form-label">Contenuto</label>

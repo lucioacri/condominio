@@ -5,6 +5,10 @@
     <h1>{{ $document->title }}</h1>
     <h6 class="text-muted">{{ $document->type }} | Caricato da {{ $document->user->name }} il {{ $document->created_at->format('d/m/Y H:i') }}</h6>
 
+    @if($document->amount)
+    <p><strong>Importo:</strong> € {{ number_format($document->amount, 2, ',', '.') }}</p>
+    @endif
+
     @if($document->image_path)
         <img src="{{ asset($document->image_path) }}" class="img-fluid detail-img">
     @endif
