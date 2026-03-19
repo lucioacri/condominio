@@ -77,6 +77,12 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     
     Route::post('/upload', function (\Illuminate\Http\Request $request) {
         $user = Auth::user();
+
+        if ($request->amount) {
+        $request->merge([
+            'amount' => str_replace(',', '.', $request->amount)
+        ]);
+    }
         if (!$user || !$user->isAdmin()) {
             abort(403);
         }
@@ -86,16 +92,16 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         'type' => 'required|string|max:100',
         'content' => 'required|string',
         'amount' => 'nullable|numeric',
-        'image' => 'nullable|image|max:2048',
+        'file' => 'nullable|mimes:jpg,jpeg,png,pdf,doc,docx|max:4096',
         ]);
 
-        $imagePath = null;
+        $filePath = null;
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('uploads'), $imageName); 
-            $imagePath = 'uploads/' . $imageName; 
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $fileName);
+            $filePath = 'uploads/' . $fileName;
         }
 
         Document::create([
@@ -103,7 +109,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             'type' => $request->type,
             'content' => $request->content,
             'amount' => $request->amount,
-            'image_path' => $imagePath,
+            'image_path' => $filePath,
             'user_id' => $user->id,
         ]); 
 
@@ -119,9 +125,16 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     })->name('admin.documents.edit');
 
     Route::put('/documents/{document}', function (\Illuminate\Http\Request $request, Document $document) {
+        
 
     if (!Auth::user()->isAdmin()) {
         abort(403);
+    }
+
+    if ($request->amount) {
+        $request->merge([
+            'amount' => str_replace(',', '.', $request->amount)
+        ]);
     }
 
     $request->validate([
@@ -129,22 +142,22 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         'type' => 'required|string|max:100',
         'content' => 'required|string',
         'amount' => 'nullable|numeric',
-        'image' => 'nullable|image|max:2048',
+        'file' => 'nullable|mimes:jpg,jpeg,png,pdf,doc,docx|max:4096',
     ]);
 
     
-    if ($request->hasFile('image')) {
+    if ($request->hasFile('file')) {
 
         
         if ($document->image_path && file_exists(public_path($document->image_path))) {
             unlink(public_path($document->image_path));
         }
 
-        $image = $request->file('image');
-        $imageName = time().'_'.$image->getClientOriginalName();
-        $image->move(public_path('uploads'), $imageName);
+        $file = $request->file('file');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $fileName);
 
-        $document->image_path = 'uploads/'.$imageName;
+        $document->image_path = 'uploads/' . $fileName;
     }
 
     $document->update([

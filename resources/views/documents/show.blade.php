@@ -10,8 +10,18 @@
     @endif
 
     @if($document->image_path)
-        <img src="{{ asset($document->image_path) }}" class="img-fluid detail-img">
-    @endif
+                        @php
+                            $extension = pathinfo($document->image_path, PATHINFO_EXTENSION);
+                        @endphp
+
+                        @if(in_array($extension, ['jpg', 'jpeg', 'png']))
+                            <img src="{{ asset($document->image_path) }}" class="card-img-top card-img-standard" alt="Immagine">
+                        @else
+                            <div class="p-3 text-center">
+                                <a href="{{ asset($document->image_path) }}" target="_blank" class="btn btn-outline-primary">Apri documento</a>
+                            </div>
+                        @endif
+                        @endif
 
     <p>{{ $document->content }}</p>
 

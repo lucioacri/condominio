@@ -58,17 +58,29 @@
         </div>
 
         @if($document->image_path)
+            @php
+                $extension = pathinfo($document->image_path, PATHINFO_EXTENSION);
+            @endphp
+
             <div class="mb-3">
-                <p>Immagine attuale:</p>
-                <img src="{{ asset($document->image_path) }}"
-                    class="img-fluid mb-2" style="max-height: 200px">
+                <p>File attuale:</p>
+
+                @if(in_array($extension, ['jpg', 'jpeg', 'png']))
+                    <img src="{{ asset($document->image_path) }}"
+                        class="img-fluid mb-2"
+                        style="max-height: 200px">
+                @else
+                    <a href="{{ asset($document->image_path) }}" target="_blank" class="btn btn-outline-primary">
+                        📄 Apri documento
+                    </a>
+                @endif
             </div>
         @endif
 
 
         <div class="mb-3">
-            <label class="form-label">Nuova immagine</label>
-            <input type="file" name="image" class="form-control">
+            <label class="form-label">Nuovo file</label>
+            <input type="file" name="file" class="form-control">
         </div>
 
         <button class="btn btn-primary">Salva modifiche</button>

@@ -8,6 +8,16 @@
         <div style="color:green;">{{ session('success') }}</div>
     @endif
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('admin.upload') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
@@ -36,8 +46,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="image">Immagine (facoltativa):</label>
-            <input type="file" name="image" id="image">
+            <label for="file">File (facoltativo):</label>
+            <input type="file" name="file" id="image">
         </div>
 
         <button type="submit">Salva documento</button>

@@ -13,7 +13,17 @@
                     <div class="card h-100 shadow-sm">
 
                         @if($doc->image_path)
-                            <img src="{{ asset($doc->image_path) }}" class="card-img-top card-img-standard">
+                        @php
+                            $extension = pathinfo($doc->image_path, PATHINFO_EXTENSION);
+                        @endphp
+
+                        @if(in_array($extension, ['jpg', 'jpeg', 'png']))
+                            <img src="{{ asset($doc->image_path) }}" class="card-img-top card-img-standard" alt="Immagine">
+                        @else
+                            <div class="p-3 text-center">
+                                <a href="{{ asset($doc->image_path) }}" target="_blank" class="btn btn-outline-primary"></a>
+                            </div>
+                        @endif
                         @endif
 
                         <div class="card-body d-flex flex-column">
