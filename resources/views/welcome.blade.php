@@ -21,7 +21,9 @@
                             <img src="{{ asset($doc->image_path) }}" class="card-img-top card-img-standard" alt="Immagine">
                         @else
                             <div class="p-3 text-center">
-                                <a href="{{ asset($doc->image_path) }}" target="_blank" class="btn btn-outline-primary"></a>
+                                <a href="{{ asset($doc->image_path) }}" target="_blank" class="btn btn-outline-primary">
+                                    Apri documento
+                                </a>
                             </div>
                         @endif
                         @endif
