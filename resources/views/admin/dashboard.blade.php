@@ -17,7 +17,7 @@
             @foreach($documents as $doc)
                 <div class="col-md-12">
                     <div class="card h-100 shadow-sm" >
-                        @if($doc->image_path)
+                        {{-- @if($doc->image_path)
                         @php
                             $extension = pathinfo($doc->image_path, PATHINFO_EXTENSION);
                         @endphp
@@ -29,7 +29,7 @@
                                 <a href="{{ asset($doc->image_path) }}" target="_blank" class="btn btn-outline-primary">Apri documento</a>
                             </div>
                         @endif
-                        @endif
+                        @endif --}}
 
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ $doc->title }}</h5>
@@ -40,6 +40,7 @@
                                     <strong>Importo:</strong> € {{ number_format($doc->amount, 2, ',', '.') }}
                                 </p>
                             @endif
+
                             
                         </div>
                         <div class="card-footer text-muted">

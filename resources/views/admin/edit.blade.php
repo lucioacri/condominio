@@ -51,6 +51,17 @@
             >
         </div>
 
+        <div class="mb-3">
+            <label class="form-label">Numero partecipanti</label>
+            <input 
+                type="number" 
+                name="participants" 
+                class="form-control"
+                min="1"
+                value="{{ old('participants', $document->participants) }}"
+            >
+        </div>
+
 
         <div class="mb-3">
             <label class="form-label">Contenuto</label>

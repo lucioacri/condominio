@@ -27,8 +27,16 @@
         </div>
 
         <div class="mb-3">
-            <label for="amount" class="form-label">Importo:</label>
+            <label for="amount" class="form-label">Importo complessivo:</label>
             <input type="decimal" class="form-control" name="amount" id="amount" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Numero partecipanti</label>
+            <input type="number" 
+                name="participants" 
+                class="form-control" 
+                min="1">
         </div>
 
         <div class="mb-3">

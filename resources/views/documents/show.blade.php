@@ -6,8 +6,23 @@
     <h6 class="text-muted">{{ $document->type }} | Caricato da {{ $document->user->name }} il {{ $document->created_at->format('d/m/Y H:i') }}</h6>
 
     @if($document->amount)
-    <p><strong>Importo:</strong> € {{ number_format($document->amount, 2, ',', '.') }}</p>
+    <p><strong>Importo complessivo:</strong> € {{ number_format($document->amount, 2, ',', '.') }}</p>
     @endif
+
+    @if ($document->amount && $document->participants)
+
+                                @php
+                                    $procapite = $document->amount / $document->participants;
+                                @endphp
+
+                                <p>
+                                    <strong>Importo a Lei addebitato:</strong> 
+                                    € {{ number_format($procapite, 2, ',', '.') }}
+                                    <small>({{ $document->participants }} persone)</small>
+                                </p>
+
+                                
+                            @endif
 
     @if($document->image_path)
                         @php

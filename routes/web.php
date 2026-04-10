@@ -80,7 +80,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
         if ($request->amount) {
         $request->merge([
-            'amount' => str_replace(',', '.', $request->amount)
+            'amount' => str_replace(',', '.', $request->amount),
         ]);
     }
         if (!$user || !$user->isAdmin()) {
@@ -93,6 +93,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         'content' => 'required|string',
         'amount' => 'nullable|numeric',
         'file' => 'nullable|mimes:jpg,jpeg,png,pdf,doc,docx|max:4096',
+        'participants' => 'nullable|integer|min:1',
         ]);
 
         $filePath = null;
@@ -111,6 +112,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             'amount' => $request->amount,
             'image_path' => $filePath,
             'user_id' => $user->id,
+            'participants' => $request->participants,
         ]); 
 
         return back()->with('success', 'Documento salvato correttamente!');
@@ -133,7 +135,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     if ($request->amount) {
         $request->merge([
-            'amount' => str_replace(',', '.', $request->amount)
+            'amount' => str_replace(',', '.', $request->amount),
         ]);
     }
 
@@ -143,6 +145,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         'content' => 'required|string',
         'amount' => 'nullable|numeric',
         'file' => 'nullable|mimes:jpg,jpeg,png,pdf,doc,docx|max:4096',
+        'participants' => 'nullable|integer|min:1',
     ]);
 
     
@@ -166,6 +169,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         'content' => $request->content,
         'amount' => $request->amount,
         'image_path' => $document->image_path,
+        'participants' => $request->participants,
     ]);
 
     return redirect()->route('admin.dashboard')

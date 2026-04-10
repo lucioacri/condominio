@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                     <div class="card h-100 shadow-sm">
 
-                        @if($doc->image_path)
+                        {{-- @if($doc->image_path)
                         @php
                             $extension = pathinfo($doc->image_path, PATHINFO_EXTENSION);
                         @endphp
@@ -26,12 +26,12 @@
                                 </a>
                             </div>
                         @endif
-                        @endif
+                        @endif --}}
 
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ $doc->title }}</h5>
                             <div>
-                                <span class="badge bg-secondary mb-2">{{ $doc->type }}</span>
+                                <a href="{{ route('documents.show', $doc) }}" class="btn btn-primary my-end">Visualizza</a>
                             </div>
 
                             @if($doc->amount)
@@ -46,9 +46,9 @@
                         <div class="card-footer text-muted small">
                             Pubblicato da <strong>{{ $doc->user->name }}</strong><br>
                             {{ $doc->created_at->format('d/m/Y H:i') }}
-                            <div>
+                            {{-- <div>
                                 <a href="{{ route('documents.show', $doc) }}" class="btn btn-primary my-end">Visualizza</a>
-                            </div>
+                            </div> --}}
                         </div>
 
                     </div>
